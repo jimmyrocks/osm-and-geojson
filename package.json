@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/aaronlidman/osm-and-geojson/issues"
   },
+  "dependencies": {
+    "xmldom": "0.1.19"
+  },
   "devDependencies": {
     "expect.js": "~0.2.0",
     "mocha": "~1.12.0",
