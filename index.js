@@ -1,5 +1,5 @@
 var geojson2osm = {};
-geojson2osm.geojson2osm = function(geojson) {
+geojson2osm.geojson2osm = function(geojson, generator) {
     function togeojson(geo, properties) {
         if (typeof geo === 'string') geo = JSON.parse(geo);
         var nodes = '',
@@ -22,6 +22,23 @@ geojson2osm.geojson2osm = function(geojson) {
                 append(Polygon(geo, properties));
                 break;
             case 'MultiPolygon':
+                relations += '<relation id="' + count + '" changeset="' + changeset + '">';
+                properties.type = 'multipolygon';
+                count--;
+
+                for (var i = 0; i < geo.coordinates.length; i++){
+
+                    poly = polygon({
+                        'coordinates': geo.coordinates[i]
+                    }, undefined, true);
+
+                    nodes += poly.nodes;
+                    ways += poly.ways;
+                    relations += poly.relations;
+                }
+
+                relations += propertiesToTags(properties);
+                relations += '</relation>';
                 break;
         }
 
@@ -176,7 +193,7 @@ geojson2osm.geojson2osm = function(geojson) {
                 temp.ways += obj[n].ways;
                 temp.relations += obj[n].relations;
             }
-            temp.osm = '<?xml version="1.0" encoding="UTF-8"?><osm version="0.6" generator="https://github.com/Rub21/geojson2osm">';
+            temp.osm = '<?xml version="1.0" encoding="UTF-8"?><osm version="0.6" generator="' + (generator || 'https://github.com/Rub21/geojson2osm') + '">';
             temp.osm += temp.nodes + temp.ways + temp.relations;
             temp.osm += '</osm>';
             osm_file = temp.osm;
@@ -187,4 +204,4 @@ geojson2osm.geojson2osm = function(geojson) {
     }
     return osm_file;
 };
-if (typeof module !== 'undefined') module.exports = geojson2osm;
+if (typeof module !== 'undefined') module.exports = geojson2osm.geojson2osm;
