@@ -1,31 +1,31 @@
 {
-  "name": "osm-and-geojson",
-  "version": "0.1.2",
-  "description": "convert to and from osm and geojson files",
-  "main": "osm_geojson.js",
-  "scripts": {
-    "test": "mocha -R spec"
+  "name": "geojson2osm",
+  "version": "0.0.3",
+  "main": "./index",
+  "engines": {
+    "node": "0.10.28"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/aaronlidman/osm-and-geojson.git"
+    "type": "git"
   },
+  "dependencies": {},
+  "scripts": {
+    "run": "./index.js"
+  },
+  "description": "Convert geojson to osm",
   "keywords": [
-    "openstreetmap",
-    "geojson",
-    "maps"
+    "osm",
+    "geojson"
   ],
-  "author": "Aaron Lidman",
-  "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/aaronlidman/osm-and-geojson/issues"
-  },
-  "dependencies": {
-    "xmldom": "0.1.19"
-  },
-  "devDependencies": {
-    "expect.js": "~0.2.0",
-    "mocha": "~1.12.0",
-    "reqwest": "~0.9.0"
-  }
+  "author": "Jim McAndrew <james_mcandrew@partner.nps.gov>",
+  "license": "ISC",
+  "contributors": [{
+    "name": "Aaron Lidman",
+    "license": "WTFPL"
+  }, {
+    "name": "Ruben Lopez M",
+    "email": "ruben@mapbox.com",
+    "website": "http://rub21.github.io/",
+    "license": "ISC"
+  }]
 }
